@@ -11,8 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 /**
@@ -37,7 +38,8 @@ public class AuthorizeController {
     @GetMapping("/callback")
     public String callback(@RequestParam("code") String code,
                            @RequestParam("state") String state,
-                           HttpServletRequest request) {
+                           HttpServletRequest request,
+                           HttpServletResponse response) {
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setClient_id(clientId);
         accessTokenDTO.setClient_secret(secretId);
@@ -46,26 +48,25 @@ public class AuthorizeController {
         accessTokenDTO.setCode(code);
         //得到githubUser
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
+//        System.out.println(accessToken);
         String[] strings = accessToken.split("&");
         String[] strings1= strings[0].split("=");
         accessToken = strings1[1];
         GithubUserDTO githubUser = githubProvider.getUser(accessToken);
-        System.out.println(githubUser);
+//        System.out.println(githubUser);
         if (githubUser != null){
             //登陆成功，存入数据库
             User user= new User();
-            user.setToken(UUID.randomUUID().toString());
+            String token = UUID.randomUUID().toString();
+            user.setToken(token);
             user.setAccountId(String.valueOf(githubUser.getId()));
             user.setName(githubUser.getName());
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
             userMapper.insert(user);
-
-            HttpSession session = request.getSession();
-            session.setAttribute("githubUser",githubUser);
+            response.addCookie(new Cookie("token",token));
             return "redirect:/";
         }else{
-
             return "redirect:/";
         }
 

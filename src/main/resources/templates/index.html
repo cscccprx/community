@@ -39,9 +39,9 @@
             <ul class="nav navbar-nav navbar-right">
                 <!--/*@thymesVar id="user" type"*/-->
                 <!--/*@thymesVar id="user" type="com.alibaba."*/-->
-                <li th:if="${session.githubUser==null}"><a href="https://github.com/login/oauth/authorize?client_id=74a1e16659cdef0235ae&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录</a></li>
-                <li th:if="${session.githubUser!=null}" class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.githubUser.getName()}"><span class="caret"></span>我</a>
+                <li th:if="${session.user==null}"><a href="https://github.com/login/oauth/authorize?client_id=74a1e16659cdef0235ae&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录</a></li>
+                <li th:if="${session.user!=null}" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.user.getName()}"><span class="caret"></span>我</a>
                     <ul class="dropdown-menu">
                         <li><a href="#">消息中心</a></li>
                         <li><a href="#">个人资料</a></li>
