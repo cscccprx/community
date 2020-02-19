@@ -1,18 +1,10 @@
 ## 社区
-自己的项目，大家自行阅读学习
+自己跟着网上做的一个联系项目，主要使用spring boot 搭建的一个社区，用的技术栈都在下面，大家使用自取
 
 ## 文档
 [github登录接口文档](https://developer.github.com/apps/building-oauth-apps/)
-
-## 数据库表
-```sql
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `account_id` varchar(100) DEFAULT NULL,
-  `name` varchar(50) DEFAULT NULL,
-  `token` char(36) DEFAULT NULL,
-  `gmt_create` bigint(20) DEFAULT NULL,
-  `gmt_modified` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-```
+[lombok](https://projectlombok.org/)
+[flyway](https://flywaydb.org/)
+## 数据库
+使用的数据库表在 项目的src/main/java/community/db/mygration/*.sql  中自己查找
+本项目使用了flyway可以运行就会生成，找好路径即可

@@ -51,6 +51,11 @@ public class publishController {
         }
 
         Cookie[] cookies = request.getCookies();
+        if(cookies==null){
+            System.out.println("用户未登录");
+            model.addAttribute("error","用户未登录");
+            return "publish";
+        }
         //获取当前用户
         User user = null;
         for(Cookie cookie : cookies){
@@ -61,6 +66,7 @@ public class publishController {
             }
         }
         if(user == null){
+            System.out.println("用户未登录");
             model.addAttribute("error","用户未登录");
             return "publish";
         }
@@ -74,7 +80,7 @@ public class publishController {
         System.out.println(question);
         questionMapper.create(question);
 //        model.addAttribute("error","用户未登录");
-//        return "redirect:/";
-        return "publish";
+        return "redirect:/";
+
     }
 }
