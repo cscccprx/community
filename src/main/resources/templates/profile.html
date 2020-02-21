@@ -15,27 +15,25 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
-    <title>码匠社区</title>
+    <title th:text="${sectionName}"></title>
 </head>
 
 <body>
 <div th:insert="~{navigation :: nav}"></div>
-<div class="container-fluid main">
+<div class="container-fluid main profile">
     <div class="row">
         <div class="col-lg-9 col-xs-12 col-sm-12 col-md-12 "  >
-            <h2><span class="glyphicon glyphicon-list" aria-hidden="true">发现</span></h2>
+            <h2 th:text="${sectionName}"></h2>
             <hr>
             <div class="media" th:each="question : ${questions}">
-                <div class="media-left">
-                    <a href="#">
-                        <img class="media-object img-rounded media-object-change"
-                             th:src="${question.user.avatarUrl}" >
-                    </a>
-                </div>
+<!--                <div class="media-left">-->
+<!--                    <a href="#">-->
+<!--                        <img class="media-object img-rounded media-object-change"-->
+<!--                             th:src="${question.user.avatarUrl}" >-->
+<!--                    </a>-->
+<!--                </div>-->
                 <div class="media-body">
-                    <h4 class="media-heading" >
-                        <a th:href="@{'question/'+${question.id}}" th:text="${question.title}"></a>
-                    </h4>
+                    <h4 class="media-heading" th:text="${question.title}"></h4>
                     <span th:text="${question.description}"></span><br>
                     <span class="text-desc">
                         <span th:text="${question.commentCount}"></span>个回复 ●
@@ -44,12 +42,12 @@
                     </span>
                 </div>
             </div>
-<!--            显示分页-->
+<!--                        显示分页-->
             <nav>
                 <ul class="pagination">
                     <li>
                         <a th:if="${not isFirstPage}"
-                           th:href="@{/(pageNum=${pageNum-1},pageSize=${pageSize})}" aria-label="Previous">
+                           th:href="@{/profile/${action}(pageNum=${pageNum-1},pageSize=${pageSize})}" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                         <a th:if="${isFirstPage}" href="javascript:void(0);" aria-label="Previous">
@@ -63,14 +61,14 @@
                         </a>
 
                         <a th:if="${not (pageNum eq pageNo)}"
-                           th:href="@{'/'(pageNum=${pageNo},pageSize=${pageSize})}">
+                           th:href="@{/profile/${action}(pageNum=${pageNo},pageSize=${pageSize})}">
                             <span th:text="${pageNo}"></span>
                         </a>
                         &nbsp;
                     </li>
 
                     <li>
-                        <a th:if="${not isLastPage}" th:href="@{/(pageNum=${pageNum+1},pageSize=${pageSize})}"
+                        <a th:if="${not isLastPage}" th:href="@{/profile/${action}(pageNum=${pageNum+1},pageSize=${pageSize})}"
                            aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
@@ -84,7 +82,13 @@
 
 
         <div class="col-lg-3 col-xs-12 col-sm-12 col-md-12">
-            <h3>热点话题</h3>
+            <div class="list-group section">
+                <a href="/profile/questions" th:class="${section == 'questions'? 'active list-group-item':'list-group-item'}">我的问题</a>
+                <a href="/profile/replies" th:class="${section == 'replies'? 'active list-group-item':'list-group-item'}">
+                    最新回复
+                    <span class="badge">14</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>

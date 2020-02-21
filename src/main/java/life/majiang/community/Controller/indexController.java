@@ -5,7 +5,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import life.majiang.community.dto.QuestionDTO;
 import life.majiang.community.mapper.UserMapper;
-import life.majiang.community.model.User;
 import life.majiang.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -30,28 +28,14 @@ public class indexController {
                         @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
                         @RequestParam(value = "pageSize",defaultValue = "5")Integer pageSize){
     
-        Cookie[] cookies = request.getCookies();
-        //第一次登陆   不用判断cookie
-        if(cookies == null)
-            return "index";
-        for(Cookie cookie : cookies){
-            if(cookie.getName().equals("token")){
-                String token = cookie.getValue();
-                User user = userMapper.findByToken(token);
-                if(user!=null){
-                    request.getSession().setAttribute("user",user);
-                }
-                break;
-            }
-        }
 
-
+        //分页
         Page page=PageHelper.startPage(pageNum,pageSize);
         List<QuestionDTO> questions = questionService.list();
 
         //需要封装一下，否则total 会和页大小相同
         PageInfo<QuestionDTO> pageInfo = new PageInfo<>(page.getResult());
-
+        model.addAttribute("pageInfo",pageInfo);
         //获取页数
         model.addAttribute("pageNum",pageInfo.getPageNum());
         //第一页显示的条数
