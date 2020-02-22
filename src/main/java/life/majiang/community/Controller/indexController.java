@@ -32,7 +32,7 @@ public class indexController {
         //分页
         Page page=PageHelper.startPage(pageNum,pageSize);
         List<QuestionDTO> questions = questionService.list();
-
+//        System.out.println(questions);
         //需要封装一下，否则total 会和页大小相同
         PageInfo<QuestionDTO> pageInfo = new PageInfo<>(page.getResult());
         model.addAttribute("pageInfo",pageInfo);

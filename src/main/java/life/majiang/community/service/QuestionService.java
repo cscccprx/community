@@ -35,12 +35,12 @@ public class QuestionService {
         return questionDTOList;
     }
 
-    public List<Question> getListByid(Integer id){
+    public List<Question> getListByid(Long id){
         List<Question> questions = questionMapper.getListById(id);
         return questions;
     }
 
-    public QuestionDTO getQuestionById(Integer id) {
+    public QuestionDTO getQuestionById(Long id) {
         Question question = questionMapper.getQuestionById(id);
         if (question == null){
             throw new CustomizeException(CustomizeErrorCodeI.QUESTION_NOT_FOUND);
@@ -62,5 +62,12 @@ public class QuestionService {
             question.setGmtModified(System.currentTimeMillis());
             questionMapper.update(question);
         }
+    }
+
+    public void incView(Long id) {
+        questionMapper.updateView(id);
+    }
+    public void incCommentCount(){
+
     }
 }
