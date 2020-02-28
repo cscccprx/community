@@ -7,7 +7,11 @@ public enum CustomizeErrorCodeI implements ICustomErrorCode {
     NO_LOGIN(2003,"未登录不能进行评论，请先登录"),
     SYS_ERROR(2004,"服务器冒烟了"),
     TARGET_PARAM_WRONG(2005,"评论不正确或不存在"),
-    COMMENT_NOT_FOUNT(2006,"评论不存在");
+    COMMENT_NOT_FOUNT(2006,"评论不存在"),
+    COMMENT_IS_EMPTY(2007,"输入内容不能为空"),
+    READ_NOTIFICATION_FAIL(2008,"不能读别人的信息哦~"),
+    NOTIFICATION_NOT_FOUND(2009,"消息莫非不翼而飞了？");
+
 
 
 

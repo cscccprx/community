@@ -7,12 +7,15 @@ import life.majiang.community.mapper.QuestionMapper;
 import life.majiang.community.mapper.UserMapper;
 import life.majiang.community.model.Question;
 import life.majiang.community.model.User;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionService {
@@ -23,7 +26,7 @@ public class QuestionService {
     QuestionMapper questionMapper;
 
     public List<QuestionDTO> list() {
-        List<Question> questions = questionMapper.list();
+        List<Question> questions = questionMapper.descOrderGetList();
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question : questions) {
             User user = userMapper.findById(question.getCreator());
@@ -67,7 +70,19 @@ public class QuestionService {
     public void incView(Long id) {
         questionMapper.updateView(id);
     }
-    public void incCommentCount(){
 
+
+    public List<QuestionDTO> selectRelated(QuestionDTO questionDTO) {
+        if (StringUtils.isBlank(questionDTO.getTag())){
+            return new ArrayList<>();
+        }
+        String[] split = questionDTO.getTag().split(",");
+        String collect = Arrays.stream(split).collect(Collectors.joining("|"));
+        List<QuestionDTO> questionDTOList = questionMapper.selectRelated(collect, questionDTO.getId());
+        return questionDTOList;
+    }
+
+    public List<Question> getListById(Long id) {
+        return questionMapper.getListById(id);
     }
 }

@@ -25,10 +25,91 @@ body{
 .profile .section{
     margin-top: 15px;
 }
+.profile-size{
+    font-size: 12px;
+}
 .community-menu{
     color: #999;
     font-size: 13px;
 }
 .community-font{
     font-size: 14px;
+}
+.media-body{
+    padding-top:10px;
+}
+.comment{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.comment-btn{
+    float: right;
+    margin-bottom: 10px;
+}
+.comments{
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eeeeee;
+}
+.comment-sp{
+    margin-top: 0;
+}
+.menu{
+    color: #999999;
+    margin-top: 5px;
+}
+.menu .icon{
+    margin-right: 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.menu .active{
+    color: darkcyan;
+;
+}
+.menu .icon:hover{
+    color: darkcyan;
+}
+
+.question-title{
+    margin-top: 25px;
+}
+.question-tag{
+    margin-right: 5px;
+}
+.question-tag-size{
+    font-size: 17px;
+}
+.question-related{
+    line-height: 20px;
+    font-size: 13px;
+    margin-left: 0;
+    list-style: none;
+    padding-left: 0;
+}
+.question-wechat{
+    width: 100%;
+}
+
+.publish-tag-tab{
+    display: none;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+.publish-tag-tab .label-info{
+    margin-right: 10px;
+    white-space: normal;
+}
+.publish-select-tag-size{
+    font-size: 10px;
+}
+.sub-comments{
+    border-radius: 5px;
+    margin-top: 10px;
+    border: 1px  solid #B8B8B8;
+    padding-top: 15px;
+    margin-bottom: 15px;
+}
+.sub-comments .btn{
+    margin: 10px 0;
 }
