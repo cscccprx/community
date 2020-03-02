@@ -17,7 +17,7 @@ public interface QuestionMapper {
     @Select("select * from question order by gmt_create desc")
     List<Question> descOrderGetList();
 
-    @Select("select * from question where creator = #{creator}")
+    @Select("select * from question where creator = #{creator} order by gmt_create desc")
     List<Question> getListById(@Param("creator")Long id);
 
     @Select("select * from question where id = #{id}")

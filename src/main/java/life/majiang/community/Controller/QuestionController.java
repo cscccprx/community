@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -33,6 +35,8 @@ public class QuestionController {
         model.addAttribute("relatedQuestions",relatedQuestions);
         model.addAttribute("comments",comments);
         model.addAttribute("question",questionDTO);
+
+
         return "question";
 
     }
