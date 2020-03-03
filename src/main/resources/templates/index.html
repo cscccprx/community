@@ -50,7 +50,7 @@
                     <span class="text-desc">
                         <span th:text="${question.commentCount}"></span>个回复 ●
                         <span th:text="${question.viewCount}"></span>次浏览 ●
-                        <span th:text="${#dates.format(question.gmtCreate,'dd MMMM YYYY')}"></span>
+                        <span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd')}"></span>
                     </span>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                 <ul class="pagination">
                     <li>
                         <a th:if="${not isFirstPage}"
-                           th:href="@{/(pageNum=${pageNum-1},pageSize=${pageSize})}" aria-label="Previous">
+                           th:href="@{/(pageNum=${pageNum-1},pageSize=${pageSize},search=${search})}" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                         <a th:if="${isFirstPage}" href="javascript:void(0);" aria-label="Previous">
@@ -73,14 +73,14 @@
                         </a>
 
                         <a th:if="${not (pageNum eq pageNo)}"
-                           th:href="@{'/'(pageNum=${pageNo},pageSize=${pageSize})}">
+                           th:href="@{'/'(pageNum=${pageNo},pageSize=${pageSize},search=${search})}">
                             <span th:text="${pageNo}"></span>
                         </a>
                         &nbsp;
                     </li>
 
                     <li>
-                        <a th:if="${not isLastPage}" th:href="@{/(pageNum=${pageNum+1},pageSize=${pageSize})}"
+                        <a th:if="${not isLastPage}" th:href="@{/(pageNum=${pageNum+1},pageSize=${pageSize},search=${search})}"
                            aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>

@@ -26,6 +26,9 @@ public interface QuestionMapper {
     @Select("SELECT id,title,tag FROM question WHERE tag REGEXP #{tag} AND id!=#{id}")
     List<QuestionDTO> selectRelated(@Param("tag")String tag,@Param("id")Long id);
 
+    @Select("SELECT * FROM question WHERE title REGEXP #{title}")
+    List<Question> getRelatedQuestionList(@Param("title") String search);
+
 
     @Update("update question set title = #{title},description = #{description},gmt_modified = #{gmtModified},tag = #{tag} where id = #{id}")
     int update(Question question);
@@ -35,6 +38,4 @@ public interface QuestionMapper {
 
     @Update("UPDATE question SET comment_count = #{commentCount} WHERE id = #{id}")
     public void updateCommentCount(@Param("id") Long id,@Param("commentCount") Integer commentCount);
-
-
 }

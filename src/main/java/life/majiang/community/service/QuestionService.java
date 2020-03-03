@@ -86,4 +86,17 @@ public class QuestionService {
     public List<Question> getListById(Long id) {
         return questionMapper.getListById(id);
     }
+
+    public List<QuestionDTO> getRelatedQuestionList(String search) {
+        List<Question> relatedQuestionList = questionMapper.getRelatedQuestionList(search);
+        List<QuestionDTO> questionDTOList = new ArrayList<>();
+        for (Question question : relatedQuestionList) {
+            User user = userMapper.findById(question.getCreator());
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(question,questionDTO);
+            questionDTO.setUser(user);
+            questionDTOList.add(questionDTO);
+        }
+        return questionDTOList;
+    }
 }

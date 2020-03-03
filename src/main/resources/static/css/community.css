@@ -101,6 +101,7 @@ body{
     white-space: normal;
 }
 .publish-select-tag-size{
+    cursor: pointer;
     font-size: 10px;
 }
 .sub-comments{
