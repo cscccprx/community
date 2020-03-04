@@ -42,18 +42,8 @@ public class indexController {
             List<QuestionDTO> relatedQuestions = questionService.getRelatedQuestionList(search);
 
             PageInfo<QuestionDTO> pageInfo = new PageInfo<>(page.getResult());
-            model.addAttribute("pageInfo",pageInfo);
-            //获取页数
-            model.addAttribute("pageNum",pageInfo.getPageNum());
-            //第一页显示的条数
-            model.addAttribute("pageSize",pageInfo.getPageSize());
-            //是否是第一页
-            model.addAttribute("isFirstPage",pageInfo.isIsFirstPage());
-            //获得总页数
 
-            model.addAttribute("totalPages",pageInfo.getPages());
-            //是否是最后一页
-            model.addAttribute("isLastPage",pageInfo.isIsLastPage());
+            page(model, relatedQuestions, pageInfo);
 
             //需要展示的东西
             model.addAttribute("questions",relatedQuestions);
@@ -66,6 +56,19 @@ public class indexController {
             PageInfo<QuestionDTO> pageInfo = new PageInfo<>(page.getResult());
             model.addAttribute("pageInfo",pageInfo);
             //获取页数
+            page(model, questions, pageInfo);
+
+            //需要展示的东西
+            model.addAttribute("questions",questions);
+            return "index";
+        }
+
+    }
+
+    private <T>void page(Model model, List<T> relatedQuestions, PageInfo<T> pageInfo) {
+        if (relatedQuestions.size() != 0){
+            model.addAttribute("pageInfo",pageInfo);
+            //获取页数
             model.addAttribute("pageNum",pageInfo.getPageNum());
             //第一页显示的条数
             model.addAttribute("pageSize",pageInfo.getPageSize());
@@ -77,10 +80,11 @@ public class indexController {
             //是否是最后一页
             model.addAttribute("isLastPage",pageInfo.isIsLastPage());
 
-            //需要展示的东西
-            model.addAttribute("questions",questions);
-            return "index";
+        }else {
+            model.addAttribute("isFirstPage","true");
+            model.addAttribute("isLastPage",true);
+            model.addAttribute("totalPages",1);
+            model.addAttribute("pageNum",1);
         }
-
     }
 }
