@@ -90,7 +90,7 @@ public class publishController {
         question.setId(id);
 
         questionService.createOrUpdate(question);
-//        model.addAttribute("error","用户未登录");
+
         return "redirect:/";
 
     }

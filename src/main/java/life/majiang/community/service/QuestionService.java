@@ -99,4 +99,17 @@ public class QuestionService {
         }
         return questionDTOList;
     }
+
+    public List<QuestionDTO> getQuestion(String tag, String search) {
+        if (StringUtils.isNotBlank(tag)){
+            return getRelatedQuestionList(tag);
+        }else if (StringUtils.isNotBlank(search)){
+            String[] split = search.split(" ");
+            String collect = Arrays.stream(split).collect(Collectors.joining("|"));
+            return getRelatedQuestionList(search);
+        }else
+            return list();
+
+
+    }
 }
