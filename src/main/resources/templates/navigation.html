@@ -29,7 +29,6 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/publish" th:if="${session.user!=null}">发布</a></li>
                     <li><a href="/profile/replies" th:if="${session.user!=null}" class="">通知 <span class="badge" th:text="${session.unreadCount}" th:if="${session.unreadCount !=0}"></span></a></li>
-                    <li th:if="${session.user==null}"><a href="https://github.com/login/oauth/authorize?client_id=74a1e16659cdef0235ae&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录</a></li>
                     <li th:if="${session.user!=null}" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >
                             <span th:text="${session.user.getName()}"></span>
@@ -40,6 +39,11 @@
                             <li><a href="/logout">退出登录</a></li>
                         </ul>
                     </li>
+                    <li th:if="${session.user==null}">
+                        <a th:href="@{https://github.com/login/oauth/authorize(client_id='74a1e16659cdef0235ae',redirect_uri=${#httpServletRequest.getRequestURL()+'callback'},scope='user',state=1)}">登录
+                        </a>
+                    </li>
+
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

@@ -38,7 +38,6 @@ public class HotTagCache {
             poll = queue.poll();
         }
         tagDTOS = objects;
-        System.out.println(tagDTOS);
 
 
     }

@@ -24,6 +24,7 @@ public class CustomizeErrorController implements ErrorController {
     @RequestMapping(produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView errorHtml(HttpServletRequest request, Model model){
         HttpStatus status = getStatus(request);
+
         if (status.is4xxClientError()){
 //            model.addAttribute("message", ExternError.EXTERN_ERROR_4XX);
             throw new ExternErrorException(ExternError.EXTERN_ERROR_4XX);

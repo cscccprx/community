@@ -18,4 +18,7 @@
 ## 数据库
 数据库表在项目的src/main/java/community/db/mygration/*.sql 中
 本项目使用了flyway可以运行就会生成，只需要配置好路径即可
+## 版本
+jdk 1.8
 
+数据库 8.0

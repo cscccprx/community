@@ -49,9 +49,7 @@ public class HotTagTasks {
             offset++;
 
         }
-        priorities.forEach((k,v)-> {
-            System.out.println(k + ":" + v);
-        });
+
         hotTagCache.update(priorities);
         log.info("The time is now {}", new Date());
     }
